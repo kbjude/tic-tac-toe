@@ -54,7 +54,7 @@ RSpec.describe Game do
 
   describe '#status' do
     context 'Checks for the Game status' do
-      it "When game not yet ended" do
+      it 'When game not yet ended' do
         expect(new_game.result).to be(nil)
       end
     end
