@@ -95,9 +95,19 @@ RSpec.describe Player do
   end
 
   describe '#character' do
-    context 'Player\'s symbol' do
+    context 'Players symbol' do
       it 'returns the symbol for the player' do
         expect(new_player.character).to be_an_instance_of(String)
+      end
+
+      it 'returns the actual symbol of the player' do
+        expect(new_player.character).to eq('X')
+      end
+    end
+
+    context 'what other symbol option' do
+      it "returns the second and only other symbol nothing else" do
+        expect(new_player.character).not_to eq('Y')
       end
     end
   end
