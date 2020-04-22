@@ -7,7 +7,7 @@ RSpec.describe Game do
   let(:new_player) { Player.new('Lillian A', 'X') }
 
   describe '#start_game' do
-    context 'Game initialisation' do
+    context 'Game initialization' do
       it 'Correctly innitialises the game' do
         expect(new_game.ended?).to eql(false)
         expect(new_game.moves).to eql(0)
@@ -16,8 +16,8 @@ RSpec.describe Game do
   end
 
   describe '#player_move' do
-    context 'When a player wants to make a move' do
-      it 'When a new player makes a move' do
+    context 'When Playing' do
+      it 'a new player makes a move' do
         expect(new_game.move(new_player, 3)).to eql(nil)
       end
     end
