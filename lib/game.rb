@@ -47,7 +47,7 @@ class Game
     @ended
   end
 
-  private
+  #private
 
   def map(num)
     [(num - 1) / 3, (num - 1) % 3]

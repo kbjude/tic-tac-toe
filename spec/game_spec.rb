@@ -70,6 +70,14 @@ RSpec.describe Game do
       end
     end
   end
+
+  describe '#num' do
+    context 'The postion of the move' do
+      it 'Returns the cordinates of the move' do
+        expect(new_game.map(3)).to eql([0, 2])
+      end
+    end
+  end
 end
 
 RSpec.describe UserInterface do
@@ -113,7 +121,7 @@ RSpec.describe Player do
   end
 
   describe '#score' do
-    context 'Score returns the score value' do
+    context 'What the score of the game is' do
       it 'returns the integer value of the score' do
         expect(new_player.score).to be_an_instance_of(Integer)
       end
