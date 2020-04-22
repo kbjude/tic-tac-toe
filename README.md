@@ -55,6 +55,22 @@ The possible winning options are having 3 of your inputs on:
 
 Any thing out of these is a loss
 
+## Testing:
+### Specs
+Passing specs for each of these methods have been written with each of them having not less than 2 examples. 
+To use the tests, you need to:
+ - Have Rspec installed
+ - Have some basic knowledge on how to use rspec
+ - Have an understanding of TDD
+ 
+ #### Setting up rspec.
+  - First check for the availability of rspec on your computer using *rspec -version*. This is should return the version(s) of    rspec you have installed or return an error showing that you do not have rspec installed
+  - If you do not have it installed [click here for guidelines and the rest of steps to get you started](https://rspec.info/)
+
+### Looking at the Examples
+ - Make sure you are in the root folder of the project.
+ - For on to ran the tests/specs and their examples simply type rspec in your command line or terminal
+
 ## Authors
 
 👤 **Jude K**
