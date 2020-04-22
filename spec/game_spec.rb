@@ -51,6 +51,25 @@ RSpec.describe Game do
       end
     end
   end
+
+  describe '#status' do
+    context 'Checks for the Game status' do
+      it "When game not yet ended" do
+        expect(new_game.result).to be(nil)
+      end
+    end
+
+    context 'When the game has eneded' do
+      it 'it returns the game result' do
+        new_game.move(new_player, 7)
+        new_game.move(new_player, 3)
+        new_game.move(new_player, 5)
+        new_game.move(new_player, 1)
+        new_game.move(new_player, 9)
+        expect(new_game.result).to eq('Game over: Lillian A with symbol X has won')
+      end
+    end
+  end
 end
 
 RSpec.describe UserInterface do
