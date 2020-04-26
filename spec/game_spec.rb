@@ -78,6 +78,18 @@ RSpec.describe Game do
       end
     end
   end
+
+  describe '#winner' do
+  context 'When a game comes to an end' do
+    it 'A winner is identified if there is one' do
+      expect(new_game.winner?(new_player, 3)).to eql(false)
+      new_game.move(new_player, 7)
+      new_game.move(new_player, 3)
+      new_game.move(new_player, 5)
+      expect(new_game.winner?{ |item| item == player.character }).to eql(true)
+    end
+  end
+  end
 end
 
 RSpec.describe UserInterface do
@@ -92,7 +104,7 @@ RSpec.describe UserInterface do
 end
 
 RSpec.describe Player do
-  let(:new_player) { Player.new('lillian', 'X') }
+  let(:new_player) { Player.new('Lillian', 'X') }
 
   describe '#name' do
     context 'User details' do
