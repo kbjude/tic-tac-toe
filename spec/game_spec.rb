@@ -19,6 +19,8 @@ RSpec.describe Game do
     context 'When Playing' do
       it 'a new player makes a move' do
         expect(new_game.move(new_player, 3)).to eql(nil)
+        expect(new_game.move.result).to eql("Game over: Lillian A with symbol X has won")
+
       end
     end
   end
@@ -82,12 +84,12 @@ RSpec.describe Game do
   describe '#winner' do
     context 'When a game comes to an end' do
       it 'A winner is identified if there is one' do
-        expect(new_game.winner?(new_player, 3)).to eql(false)
         new_game.move(new_player, 7)
         new_game.move(new_player, 3)
         new_game.move(new_player, 5)
         new_game.move(new_player, 1)
         new_game.move(new_player, 9)
+        expect(new_game.result).to eq('Game over: Lillian A with symbol X has won')
         expect(new_game.winner?(new_player, 7)).to eql(true)
       end
     end
