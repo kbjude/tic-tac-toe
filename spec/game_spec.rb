@@ -5,14 +5,14 @@ require './lib/player'
 RSpec.describe Game do
   let(:new_game) { Game.new }
   let(:new_player) { Player.new('Lillian A', 'X') }
-  let(:game) { Game.new "result", "move"}
+  let(:game) { Game.new 'result', 'move'}
 
   describe '#start_game' do
     context 'Game initialization' do
       it 'Correctly innitialises the game' do
         expect(new_game.ended?).to eql(false)
         expect(new_game.moves).to eql(0)
-        lambda {Game.new "ended", "board"}.should raise_exception ArgumentError
+        lambda { Game.new 'ended', 'board' }.should raise_exception ArgumentError
       end
     end
   end
@@ -138,7 +138,7 @@ RSpec.describe Player do
     end
 
     context 'what other symbol option' do
-      it "returns the second and only other symbol nothing else" do
+      it 'returns the second and only other symbol nothing else' do
         expect(new_player.character).not_to eq('Y')
       end
     end
