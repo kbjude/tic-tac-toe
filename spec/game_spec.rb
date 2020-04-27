@@ -5,6 +5,7 @@ require './lib/player'
 RSpec.describe Game do
   let(:new_game) { Game.new }
   let(:new_player) { Player.new('Lillian A', 'X') }
+  let(:game) { Game.new "result", "move"}
 
   describe '#start_game' do
     context 'Game initialization' do
@@ -12,6 +13,7 @@ RSpec.describe Game do
         expect(new_game.ended?).to eql(false)
         expect(new_game.moves).to eql(0)
         expect (new_game.ended?).should eq(false)
+        lambda {Game.new "ended", "board"}.should raise_exception ArgumentError
       end
     end
   end
@@ -50,6 +52,7 @@ RSpec.describe Game do
         new_game.move(new_player, 1)
         new_game.move(new_player, 9)
         expect(new_game.ended?).to eql(true)
+        expect(new_game.ended?).should_not eq(new_game.move(new_player, 0))
       end
     end
   end
@@ -90,8 +93,7 @@ RSpec.describe Game do
         new_game.move(new_player, 5)
         new_game.move(new_player, 1)
         new_game.move(new_player, 9)
-        # expect(new_game.winner?(new_player, board.tmp[0,1,2])).to eq(true)
-        expect(new_game.winner?(new_player, 7)).to eql(true)
+        expect(new_game.winner?(new_player, 7).should eq(true))
       end
     end
   end
