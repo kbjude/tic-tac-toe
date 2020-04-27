@@ -102,6 +102,18 @@ RSpec.describe Game do
       new_game.move(new_player, 6)
       expect(new_game.winner?(new_player, 7).should(eq(false)))
     end
+    it 'when the player are tieing' do
+      new_game.move(new_player, 1)
+      new_game.move(new_player, 9)
+      new_game.move(new_player, 3)
+      new_game.move(new_player, 2)
+      new_game.move(new_player, 7)
+      new_game.move(new_player, 4)
+      new_game.move(new_player, 6)
+      new_game.move(new_player, 5)
+      new_game.move(new_player, 8)
+      expect(new_game.winner?(new_player, 9).should(eq(true)))
+    end
   end
 end
 
