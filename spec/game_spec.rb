@@ -51,7 +51,6 @@ RSpec.describe Game do
         new_game.move(new_player, 1)
         new_game.move(new_player, 9)
         expect(new_game.ended?).to eql(true)
-        expect(new_game.ended?).should_not eq(new_game.move(new_player, 0))
       end
     end
   end
@@ -70,7 +69,6 @@ RSpec.describe Game do
         new_game.move(new_player, 5)
         new_game.move(new_player, 1)
         new_game.move(new_player, 9)
-        expect(new_game.moves).to eq(5)
         expect(new_game.result).to eq('Game over: Lillian A with symbol X has won')
       end
     end
@@ -93,14 +91,6 @@ RSpec.describe Game do
         new_game.move(new_player, 1)
         new_game.move(new_player, 9)
         expect(new_game.winner?(new_player, 7).should(eq(true)))
-      end
-      it 'and the winner winning vertically' do
-        new_game.move(new_player, 3)
-        new_game.move(new_player, 1)
-        new_game.move(new_player, 6)
-        new_game.move(new_player, 4)
-        new_game.move(new_player, 9)
-        expect(new_game.winner?(new_player, 3).should(eq(false)))
       end
     end
     it 'when the player is losing' do
