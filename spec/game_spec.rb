@@ -12,7 +12,6 @@ RSpec.describe Game do
       it 'Correctly innitialises the game' do
         expect(new_game.ended?).to eql(false)
         expect(new_game.moves).to eql(0)
-        expect (new_game.ended?).should eq(false)
         lambda {Game.new "ended", "board"}.should raise_exception ArgumentError
       end
     end
@@ -87,7 +86,7 @@ RSpec.describe Game do
 
   describe '#winner' do
     context 'When a game comes to an end' do
-      it 'A winner is identified if there is one' do
+      it 'and the winner winning diagnolly' do
         new_game.move(new_player, 7)
         new_game.move(new_player, 3)
         new_game.move(new_player, 5)
@@ -95,17 +94,23 @@ RSpec.describe Game do
         new_game.move(new_player, 9)
         expect(new_game.winner?(new_player, 7).should eq(true))
       end
-    end
-  end
-end
-
-RSpec.describe UserInterface do
-  let(:ui) { UserInterface.new }
-  describe '#player' do
-    context 'call method play' do
-      it 'returns nil for each call' do
-        expect(ui.play).to eql(nil)
+      it 'and the winner winning vertically' do
+        new_game.move(new_player, 3)
+        new_game.move(new_player, 1)
+        new_game.move(new_player, 6)
+        new_game.move(new_player, 4)
+        new_game.move(new_player, 9)
+        expect(new_game.winner?(new_player, 3).should eq(false))
       end
+    end
+    it 'when the player is losing' do
+      new_game.move(new_player, 1)
+      new_game.move(new_player, 3)
+      new_game.move(new_player, 8)
+      new_game.move(new_player, 9)
+      new_game.move(new_player, 2)
+      new_game.move(new_player, 6)
+      expect(new_game.winner?(new_player, 7).should eq(false))
     end
   end
 end
