@@ -5,14 +5,14 @@ require './lib/player'
 RSpec.describe Game do
   let(:new_game) { Game.new }
   let(:new_player) { Player.new('Lillian A', 'X') }
-  let(:game) { Game.new 'result', 'move'}
+  let(:game) { Game.new 'result', 'move' }
 
   describe '#start_game' do
     context 'Game initialization' do
       it 'Correctly innitialises the game' do
         expect(new_game.ended?).to eql(false)
         expect(new_game.moves).to eql(0)
-        lambda { Game.new 'ended', 'board' }.should raise_exception ArgumentError
+        -> { Game.new 'ended', 'board' }.should raise_exception ArgumentError
       end
     end
   end
@@ -92,7 +92,7 @@ RSpec.describe Game do
         new_game.move(new_player, 5)
         new_game.move(new_player, 1)
         new_game.move(new_player, 9)
-        expect(new_game.winner?(new_player, 7).should eq(true))
+        expect(new_game.winner?(new_player, 7).should(eq(true)))
       end
       it 'and the winner winning vertically' do
         new_game.move(new_player, 3)
@@ -100,7 +100,7 @@ RSpec.describe Game do
         new_game.move(new_player, 6)
         new_game.move(new_player, 4)
         new_game.move(new_player, 9)
-        expect(new_game.winner?(new_player, 3).should eq(false))
+        expect(new_game.winner?(new_player, 3).should(eq(false)))
       end
     end
     it 'when the player is losing' do
@@ -110,7 +110,7 @@ RSpec.describe Game do
       new_game.move(new_player, 9)
       new_game.move(new_player, 2)
       new_game.move(new_player, 6)
-      expect(new_game.winner?(new_player, 7).should eq(false))
+      expect(new_game.winner?(new_player, 7).should(eq(false)))
     end
   end
 end
