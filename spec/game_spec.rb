@@ -11,6 +11,7 @@ RSpec.describe Game do
       it 'Correctly innitialises the game' do
         expect(new_game.ended?).to eql(false)
         expect(new_game.moves).to eql(0)
+        expect (new_game.ended?).should eq(false)
       end
     end
   end
@@ -19,8 +20,7 @@ RSpec.describe Game do
     context 'When Playing' do
       it 'a new player makes a move' do
         expect(new_game.move(new_player, 3)).to eql(nil)
-        expect(new_game.move.result).to eql("Game over: Lillian A with symbol X has won")
-
+        expect(new_game.move(new_player, 1)).should_not eq(0)
       end
     end
   end
@@ -68,6 +68,7 @@ RSpec.describe Game do
         new_game.move(new_player, 5)
         new_game.move(new_player, 1)
         new_game.move(new_player, 9)
+        expect(new_game.moves).to eq(5)
         expect(new_game.result).to eq('Game over: Lillian A with symbol X has won')
       end
     end
@@ -89,7 +90,7 @@ RSpec.describe Game do
         new_game.move(new_player, 5)
         new_game.move(new_player, 1)
         new_game.move(new_player, 9)
-        expect(new_game.result).to eq('Game over: Lillian A with symbol X has won')
+        # expect(new_game.winner?(new_player, board.tmp[0,1,2])).to eq(true)
         expect(new_game.winner?(new_player, 7)).to eql(true)
       end
     end
