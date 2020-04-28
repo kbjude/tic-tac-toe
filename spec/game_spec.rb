@@ -5,20 +5,23 @@ require './lib/player'
 RSpec.describe Game do
   let(:new_game) { Game.new }
   let(:new_player) { Player.new('Lillian A', 'X') }
+  let(:game) { Game.new 'result', 'move' }
 
   describe '#start_game' do
-    context 'Game initialisation' do
+    context 'Game initialization' do
       it 'Correctly innitialises the game' do
         expect(new_game.ended?).to eql(false)
         expect(new_game.moves).to eql(0)
+        -> { Game.new 'ended', 'board' }.should raise_exception ArgumentError
       end
     end
   end
 
   describe '#player_move' do
-    context 'When a player wants to make a move' do
-      it 'When a new player makes a move' do
+    context 'When Playing' do
+      it 'a new player makes a move' do
         expect(new_game.move(new_player, 3)).to eql(nil)
+        expect(new_game.move(new_player, 1)).should_not eq(0)
       end
     end
   end
@@ -51,21 +54,71 @@ RSpec.describe Game do
       end
     end
   end
-end
 
-RSpec.describe UserInterface do
-  let(:ui) { UserInterface.new }
-  describe '#player' do
-    context 'call method play' do
-      it 'returns nil for each call' do
-        expect(ui.play).to eql(nil)
+  describe '#status' do
+    context 'Checks for the Game status' do
+      it 'When game not yet ended' do
+        expect(new_game.result).to be(nil)
       end
+    end
+
+    context 'When the game has eneded' do
+      it 'it returns the game result' do
+        new_game.move(new_player, 7)
+        new_game.move(new_player, 3)
+        new_game.move(new_player, 5)
+        new_game.move(new_player, 1)
+        new_game.move(new_player, 9)
+        expect(new_game.result).to eq('Game over: Lillian A with symbol X has won')
+      end
+    end
+  end
+
+  describe '#num' do
+    context 'The postion of the move' do
+      it 'Returns the cordinates of the move' do
+        expect(new_game.map(3)).to eql([0, 2])
+      end
+    end
+  end
+
+  describe '#winner' do
+    context 'When a game comes to an end' do
+      it 'and the winner winning diagnolly' do
+        new_game.move(new_player, 7)
+        new_game.move(new_player, 3)
+        new_game.move(new_player, 5)
+        new_game.move(new_player, 1)
+        new_game.move(new_player, 9)
+        expect(new_game.winner?(new_player, 7).should(eq(true)))
+      end
+    end
+    it 'when the player is losing' do
+      new_game.move(new_player, 1)
+      new_game.move(new_player, 3)
+      new_game.move(new_player, 8)
+      new_game.move(new_player, 9)
+      new_game.move(new_player, 2)
+      new_game.move(new_player, 6)
+      expect(new_game.winner?(new_player, 7).should(eq(false)))
+    end
+    it 'when the player are tieing' do
+      new_game.move(new_player, 1)
+      new_game.move(new_player, 9)
+      new_game.move(new_player, 3)
+      new_game.move(new_player, 2)
+      new_game.move(new_player, 7)
+      new_game.move(new_player, 4)
+      new_game.move(new_player, 6)
+      new_game.move(new_player, 5)
+      new_game.move(new_player, 8)
+      expect(new_game.winner?(new_player, 9).should(eq(true)))
     end
   end
 end
 
 RSpec.describe Player do
-  let(:new_player) { Player.new('lillian', 'X') }
+  let(:new_player) { Player.new('Lillian', 'X') }
 
   describe '#name' do
     context 'User details' do
@@ -76,15 +129,25 @@ RSpec.describe Player do
   end
 
   describe '#character' do
-    context 'Player\'s symbol' do
+    context 'Players symbol' do
       it 'returns the symbol for the player' do
         expect(new_player.character).to be_an_instance_of(String)
+      end
+
+      it 'returns the actual symbol of the player' do
+        expect(new_player.character).to eq('X')
+      end
+    end
+
+    context 'what other symbol option' do
+      it 'returns the second and only other symbol nothing else' do
+        expect(new_player.character).not_to eq('Y')
       end
     end
   end
 
   describe '#score' do
-    context 'Score returns the score value' do
+    context 'What the score of the game is' do
       it 'returns the integer value of the score' do
         expect(new_player.score).to be_an_instance_of(Integer)
       end
